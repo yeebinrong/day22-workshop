@@ -26,7 +26,7 @@ const pool = mysql.createPool({
 })
 
 // SQL Query
-const SELECT_ORDER_BY_ID = 'SELECT orders.OrderID, orders.OrderDate, orders.CustomerID, details.UnitPrice, details.Discount, details.Quantity FROM orders LEFT JOIN `Order Details` as details on orders.OrderID = details.OrderID where orders.OrderID = ?'
+const SELECT_ORDER_BY_ID = 'SELECT * FROM customerorders where OrderID = ?;'
 
 const mkQuery = (sqlStmt, pool) => {
     return async (params) => {
@@ -45,6 +45,9 @@ const mkQuery = (sqlStmt, pool) => {
 }
 
 const SELECT_ORDER_BY_ID_QUERY = mkQuery(SELECT_ORDER_BY_ID, pool)
+
+// cors header
+app.use(cors())
 
 app.get('/order/total/:id', async (req, resp) => {
     const id = req.params.id

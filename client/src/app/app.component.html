@@ -1,0 +1,22 @@
+<div fxFill fxLayout="column">
+  <mat-toolbar fxFlex="12" color="primary">Order Getter!</mat-toolbar>
+  <div fxFlex fxLayout="row" class="m-1" fxLayoutAlign="center stretch">
+      <mat-card fxFlex="70" fxLayout="column">
+          <form [formGroup]="form" fxLayout="column">
+              <mat-form-field appearance="outline"> <!-- Name Input -->
+                  <input type="number" matInput formControlName="id" placeholder="Your Order ID.">
+                  <mat-error *ngIf="form.get('id').hasError('required')">Please a valid Order ID.</mat-error>
+              </mat-form-field>
+              <button type="button" (click)="onSubmit()" mat-raised-button [disabled]="form.invalid" color="accent">Submit</button>
+          </form>
+          <mat-card class="m-1" *ngFor="let i of Orders">
+            {{i.OrderID}}
+            {{i.OrderDate}}
+            {{i.CustomerID}}
+            {{i.Total_UnitPrice}}
+            {{i.Total_Discount}}
+            {{i.Quantity}}
+          </mat-card>
+      </mat-card>
+  </div>
+</div>
